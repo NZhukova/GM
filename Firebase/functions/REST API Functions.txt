@@ -1,0 +1,120 @@
+# This file is pseudo json just to make it easier to navigate in IDEs
+
+[
+  {
+    'endpoint': /users/register
+    'queries': 
+    [
+      {
+        'type': POST
+        'in': {
+          string email
+          string password
+          string name
+        }
+      }
+    ]
+  },
+  {
+    'endpoint': /users/login
+    'queries':
+    [
+      {
+        'type': POST
+        'in': {
+          string email
+          string password
+        }
+        'out': {
+          string token
+          string user_id
+        }
+      }
+    ]
+  },
+  {
+    'endpoint': /users/<user_id>/profile
+    'queries': [
+      {
+        'type': GET
+        'header': empty
+        'out': public_user_info
+      },
+      {
+        'type': GET
+        'header': token
+        'out': all_user_info
+      },
+      {
+        'type': PATCH
+        'header': token
+        'in': _TODO_
+      }
+    ]
+  },
+  {
+    'endpoint': /companies
+    'queries':
+    [
+      {
+        'type': GET
+        'in': {
+          string sort     [name/popular/creation_date]
+          int    begin
+          int    quantity
+        }
+        'out': public_company_baseinfo[]
+      }
+    ]
+  },
+  {
+    'endpoint': /companies/create
+    'queries': [
+      {
+        'type': POST
+        'header': token
+        'in': {
+          string company_name
+        }
+      }
+    ]
+  },
+  {
+    'endpoint': /companies/<company_name>/profile
+    'queries': [
+      {
+        'type': GET
+        'header': empty
+        'out': public_company_fullinfo
+      },
+      {
+        'type': GET
+        'header': token
+        'out': private_company_info
+      },
+      {
+        'type': PATCH
+        'header': token
+        'in': {
+          ?      bank_id
+          ?      icon
+          string info
+        }
+      }
+    ]
+  },
+  {
+    'endpoint' /companies/<company_name>/donate
+    'queries': [
+      {
+        'type': POST
+        'header' token
+        'in': {
+          int    amount
+          string comment
+        }
+      }
+    ]
+  }
+]
+  
